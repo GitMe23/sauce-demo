@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from config import *
 import os
 from dotenv import load_dotenv
-import time
 load_dotenv()  
 
 @given('the user opens the Swag login page')
@@ -14,9 +13,8 @@ def step_open_swag_login_page(context):
 
 @when('the user enters a valid user name and password')
 def step_enter_valid_credentials(context):
-    context.driver.find_element(By.ID, 'user-name').send_keys(STANDARD_USER)
+    context.driver.find_element(By.ID, 'user-name').send_keys(user_dict['STANDARD_USER'])
     context.driver.find_element(By.ID, 'password').send_keys(os.getenv('SAUCE_PASSWORD'))
-    time.sleep(1)
 
 @when('the user clicks the login button')
 def step_click_login_button(context):

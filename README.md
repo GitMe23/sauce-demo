@@ -12,10 +12,9 @@ python3 -m pip install -r requirements.txt
 ```
 
 ## Environment details
-The .env is used for environment variables such as the test environment.
-The .env file in this project handles the example password. 
-Ordinarily, credentials would not exist in 
-the test framework and be populated locally using:
+The .env is used for environment variables such as credentials and details of the system under test.
+The .env file in this project handles this and is prepopulated for demonstration. 
+Credentials would typically be populated locally using:
 ```bash
 export SAUCE_PASSWORD="secret_sauce"
 ```
