@@ -6,6 +6,6 @@ Python 3
 Install Requirements via requirements.txt
 
 ## Requirements
-'''bash
+'''
 python3 -m pip install -r requirements.txt
 '''
