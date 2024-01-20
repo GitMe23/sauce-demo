@@ -4,4 +4,4 @@ Feature: Logging in to the Sauce Demo inventory
    Given I open the Sauce Demo login page
     When I enter a valid user name and password
      And I click the login button
-    Then I should be on the inventory page
+    Then I should be taken to the inventory page
