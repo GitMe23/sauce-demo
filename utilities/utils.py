@@ -13,12 +13,12 @@ def enter_credentials(driver, user, password):
     driver.find_element(By.ID, 'user-name').send_keys(user)
     driver.find_element(By.ID, 'password').send_keys(password)
 
-def click_login_button(driver):
-    driver.find_element(By.ID, 'login-button').click()
+def clickById(driver, element_id):
+    driver.find_element(By.ID, element_id).click()
 
-def log_in_to_inventory(user, password):
+def log_in_to_inventory():
     driver = initialise_driver()
     navigate_to_root(driver)
-    enter_credentials(driver, user, password)
-    click_login_button(driver)
+    enter_credentials(driver, user_dict['STANDARD_USER'], SAUCE_PASSWORD)
+    clickById(driver, "login-button")
     return driver
