@@ -23,3 +23,4 @@ def after_feature(context, feature):
 
 def after_all(context):
    logging.info('Behave finished')
+

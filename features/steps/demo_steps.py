@@ -36,6 +36,7 @@ def step_when_add_to_cart(context):
     for item in context.items:
         item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
         utils.clickById(context.driver, item_id)
+        
 
     
 

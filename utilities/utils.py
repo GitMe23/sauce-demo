@@ -20,7 +20,7 @@ def clickById(driver, element_id):
 def log_in_to_inventory(driver):
     navigate_to_root(driver)
     enter_credentials(driver, user_dict['STANDARD_USER'], SAUCE_PASSWORD)
-    clickById(driver, "login-button")
+    clickById(driver, LOGIN)
     return driver
 
 def get_item_container(context, item_name):
