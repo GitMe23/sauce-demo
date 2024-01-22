@@ -1,15 +1,12 @@
 from behave import *
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from config.config import *
 import os
 from utilities import utils
-import logging as log
-
+from config.logging_config import *
 
 @given('I am on the Sauce Demo login page')
 def step_open_swag_login_page(context):
-    context.driver = utils.initialise_driver()
     utils.navigate_to_root(context.driver)
 
 @when('I enter user name "{user}" and a valid password')
@@ -28,9 +25,7 @@ def step_then_inventory(context):
 
 @given("I log on to the inventory page")
 def step_given_inventory(context):
-    context.driver = utils.log_in_to_inventory()
-    actual_url = 'FOOBAR'
-    print(f'LANDED ON___{actual_url}')
+    utils.log_in_to_inventory(context.driver)
 
 @given("I have a list of '{items}' to order") 
 def step_given_list(context, items):

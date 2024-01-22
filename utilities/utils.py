@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from config.config import *
 import os
-import logging as log
+from config.logging_config import *
 
 def initialise_driver():
     return webdriver.Chrome()
@@ -17,8 +17,7 @@ def enter_credentials(driver, user, password):
 def clickById(driver, element_id):
     driver.find_element(By.ID, element_id).click()
 
-def log_in_to_inventory():
-    driver = initialise_driver()
+def log_in_to_inventory(driver):
     navigate_to_root(driver)
     enter_credentials(driver, user_dict['STANDARD_USER'], SAUCE_PASSWORD)
     clickById(driver, "login-button")

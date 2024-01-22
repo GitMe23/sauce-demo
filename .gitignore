@@ -1,6 +1,5 @@
 # logs
-logs
-*.log
+logs/*.log
 
 # Mac
 .DS_Store
