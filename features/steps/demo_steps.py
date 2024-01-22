@@ -36,15 +36,22 @@ def step_when_add_to_cart(context):
     utils.add_items_to_cart(context.driver, context.items)
 
 @then('I should see all of my items')
-def step_see_user_items(context):
+def step_see_items(context):
     results = [utils.item_is_in_cart(context, item) for item in context.items]
     assert all(results), "Not all items are in the cart"
 
 @given('I am on the cart page')
-def step_open_swag_login_page(context):
-    utils.log_in_to_inventory(context.driver) 
-    utils.add_items_to_cart(context.driver, context.items) 
-    utils.clickById(context.driver, SHOPPING_CART)  
+def step_open_cart_page(context):
+    utils.navigate_to_cart(context.driver, context.items)
+
+@given('I am on the "checkout-step-one" page')
+def step_open_cart_page(context):
+    utils.navigate_to_checkout_step_one(context.driver, context.items)    
+
+@given('I enter my {first} name, {last} name, and {postal_code}') 
+def step_given_enter_details(context, first, last, postal_code): 
+    utils.enter_user_details(context.driver, first, last, postal_code)  
+     
     
     
 

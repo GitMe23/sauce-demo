@@ -15,7 +15,12 @@ with open('fixtures/users.json', 'r') as data:
 user_dict = {user.upper(): user for user in user_list}
 
 # CSS ID selectors:
+USER = "user-name"
+PASSWORD = "password"
 LOGIN = "login-button"
 SHOPPING_CART = "shopping_cart_container"
-# CART = "cart_contents_container"
+CHECKOUT = "checkout"
+FIRST_NAME = "first-name"
+LAST_NAME = "last-name"
+POST_CODE = "postal-code"
 

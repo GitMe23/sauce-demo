@@ -16,10 +16,10 @@ Feature: User journeys on the Sauce Demo website
     Then I should be taken to the "cart" page 
      And I should see all of my items 
    Examples: 
-   | items                                                                   |
-   | Test.allTheThings() T-Shirt (Red)                                       | 
-   | Sauce Labs Backpack, Sauce Labs Bike Light                              | 
-   | Sauce Labs Bolt T-Shirt, Sauce Labs Fleece Jacket, Sauce Labs Onesie    |
+   | items                                                                          |
+   | Test.allTheThings() T-Shirt (Red)                                              | 
+   | Sauce Labs Backpack, Sauce Labs Bike Light                                     | 
+   | Sauce Labs Bolt T-Shirt, Sauce Labs Fleece Jacket, Sauce Labs Onesie           |
 
   @sauce-003 @browser
   Scenario Outline: The user can check out and enter their details
@@ -28,20 +28,19 @@ Feature: User journeys on the Sauce Demo website
     When I click "checkout"
     Then I should be taken to the "checkout-step-one" page 
   Examples: 
-   | items                                        |
-   | Sauce Labs Backpack, Sauce Labs Bike Light   |
+   | items                                                                            |
+   | Sauce Labs Backpack, Sauce Labs Bike Light                                       |
 
-  # @sauce-004 @browser
-  # Scenario Outline: The user can check out and enter their details
-  #  Given I have a list of <items> to order
-  #    And I am on the "checkout-step-one" page 
-  #    And I enter my <first> name, <last> name, and <zip> 
-  #   When I click "continue"
-  #   Then I should be taken to the "checkout-step-two" page 
-  #    And 
-  # Examples: 
-  #  | items                                        | first     | last    | zip     |
-  #  | Sauce Labs Backpack, Sauce Labs Bike Light   | Joe       | Bloggs  | 101     |
+  @sauce-004 @browser
+  Scenario Outline: The user can check out and enter their details
+   Given I have a list of <items> to order
+     And I am on the "checkout-step-one" page 
+     And I enter my <first> name, <last> name, and <postal_code> 
+    When I click "continue"
+    Then I should be taken to the "checkout-step-two" page 
+  Examples: 
+   | items                                        | first     | last    | postal_code |
+   | Sauce Labs Backpack, Sauce Labs Bike Light   | Joe       | Bloggs  | 101         |
    
    
    
