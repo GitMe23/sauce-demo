@@ -1,6 +1,9 @@
 # logs
 logs/*.log
 
+# Swap files
+.swp
+
 # Mac
 .DS_Store
 

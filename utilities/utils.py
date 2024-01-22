@@ -62,6 +62,22 @@ def is_visible(driver, text):
     visible_elements = [element for element in elements_with_text if element.parent and element.parent.visible]
     return bool(visible_elements)    
 
+def get_item_total_on_page(driver):
+    html_content = driver.page_source    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    subtotal_div = soup.find('div', class_='summary_subtotal_label')
+    
+    if subtotal_div:
+        subtotal_text = subtotal_div.get_text(strip=True)
+        prefix = "Item total: $"
+        
+        if prefix in subtotal_text:
+            item_total = float(subtotal_text.split(prefix)[1].replace(',', '').strip())
+            return item_total
+    
+    return None
+
+
 
 
 

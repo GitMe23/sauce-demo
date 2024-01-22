@@ -14,6 +14,9 @@ with open('fixtures/users.json', 'r') as data:
 # Create a user dictionary
 user_dict = {user.upper(): user for user in user_list}
 
+# Path to test fixtures
+ITEMS = 'fixtures/items.json'
+
 # CSS ID selectors:
 USER = "user-name"
 PASSWORD = "password"

@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from config.config import *
 import os
 from utilities import utils
+import pandas as pd
 from config.logging_config import *
 
 @given('I am on the Sauce Demo login page')
@@ -59,6 +60,26 @@ def step_open_checkout_step_two(context):
 @then('I should see "{text}"')
 def step_then_see_message(context, text):
     utils.is_visible(context.driver, text)
+
+@then('I should see that the total price is the correct sum of the items')
+def step_items_sum(context):
+    swag_catalogue_df = pd.read_json(ITEMS, orient='columns')
+    items_to_sum = context.items
+    
+    # Filter the catalogue for user's items
+    filtered_df = swag_catalogue_df[swag_catalogue_df['name'].isin(items_to_sum)]
+   
+    # Calculate the sum of prices for the specified items
+    expected_total = filtered_df['price'].sum()
+    logging.info(f'\nChosen items:\n{filtered_df}')
+    
+    # Get total on page
+    actual_total = utils.get_item_total_on_page(context.driver)
+
+    assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
+    
+
+
 
 
      
