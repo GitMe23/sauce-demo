@@ -55,16 +55,14 @@ def enter_user_details(driver, first, last, postal_code):
     driver.find_element(By.ID, POST_CODE).send_keys(postal_code)
 
 def is_visible(driver, text):
-    html_content = driver.page_source    
-    soup = BeautifulSoup(html_content, 'html.parser')
+    soup = get_html_content(driver)
     elements_with_text = soup.find_all(string=text)
     # Check if at least one visible 
     visible_elements = [element for element in elements_with_text if element.parent and element.parent.visible]
     return bool(visible_elements)    
 
 def get_item_total_on_page(driver):
-    html_content = driver.page_source    
-    soup = BeautifulSoup(html_content, 'html.parser')
+    soup = get_html_content(driver)
     subtotal_div = soup.find('div', class_='summary_subtotal_label')
     
     if subtotal_div:
@@ -77,7 +75,9 @@ def get_item_total_on_page(driver):
     
     return None
 
-
+def get_html_content(driver):
+    html_content = driver.page_source    
+    return BeautifulSoup(html_content, 'html.parser')
 
 
 

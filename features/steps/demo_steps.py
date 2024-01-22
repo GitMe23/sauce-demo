@@ -1,5 +1,8 @@
 from behave import *
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 from config.config import *
 import os
 from utilities import utils
@@ -61,7 +64,8 @@ def step_open_checkout_step_two(context):
 def step_then_see_message(context, text):
     utils.is_visible(context.driver, text)
 
-@then('I should see that the total price is the correct sum of the items')
+
+@then('I should see that the total price is the correct sum of chosen items')
 def step_items_sum(context):
     swag_catalogue_df = pd.read_json(ITEMS, orient='columns')
     items_to_sum = context.items
@@ -71,13 +75,29 @@ def step_items_sum(context):
    
     # Calculate the sum of prices for the specified items
     expected_total = filtered_df['price'].sum()
-    logging.info(f'\nChosen items:\n{filtered_df}')
+    logging.info(f'\nChosen items:\n{filtered_df}\n EXPECTED TOTAL: ${expected_total}')
     
     # Get total on page
     actual_total = utils.get_item_total_on_page(context.driver)
 
     assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
     
+
+@when('I double click on the quantity of an item')
+def step_click_quantity(context):
+    wait = WebDriverWait(context.driver, 1)
+    context.cart_quantity_div = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'cart_quantity')))
+    actions = ActionChains(context.driver)
+    actions.double_click(context.cart_quantity_div).perform()
+
+@then('I should be able to enter a new {value}')
+def step_enter_qty(context, value):
+    assert context.cart_quantity_div.send_keys(value), f"Failed to enter a new value: {value}"
+
+
+
+
+
 
 
 
