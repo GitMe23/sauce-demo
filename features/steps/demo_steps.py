@@ -13,7 +13,7 @@ def step_open_swag_login_page(context):
 def step_when_log_in(context, user):
     utils.enter_credentials(context.driver, user, SAUCE_PASSWORD)
 
-@when('I click the "{id}"')
+@when('I click "{id}"')
 def step_click(context, id):
     utils.clickById(context.driver, id)
 
@@ -33,15 +33,20 @@ def step_given_list(context, items):
 
 @when("I click 'Add to cart' for each item")
 def step_when_add_to_cart(context):
-    for item in context.items:
-        item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
-        utils.clickById(context.driver, item_id)
+    utils.add_items_to_cart(context.driver, context.items)
 
 @then('I should see all of my items')
 def step_see_user_items(context):
     results = [utils.item_is_in_cart(context, item) for item in context.items]
-    logging.warning(results)
     assert all(results), "Not all items are in the cart"
+
+@given('I am on the cart page')
+def step_open_swag_login_page(context):
+    utils.log_in_to_inventory(context.driver) 
+    utils.add_items_to_cart(context.driver, context.items) 
+    utils.clickById(context.driver, SHOPPING_CART)  
+    
+    
 
 
 

@@ -16,5 +16,6 @@ user_dict = {user.upper(): user for user in user_list}
 
 # CSS ID selectors:
 LOGIN = "login-button"
-CART = "cart_contents_container"
+SHOPPING_CART = "shopping_cart_container"
+# CART = "cart_contents_container"
 

@@ -25,6 +25,11 @@ def log_in_to_inventory(driver):
     clickById(driver, LOGIN)
     return driver
 
+def add_items_to_cart(driver, items):
+    for item in items:
+        item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
+        clickById(driver, item_id)
+
 def item_is_in_cart(context, item_name):
     html_content = context.driver.page_source    
     soup = BeautifulSoup(html_content, 'html.parser')
