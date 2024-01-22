@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from config.config import *
 import os
 from utilities import utils
+import logging as log
 
 
 @given('I am on the Sauce Demo login page')
@@ -25,14 +26,24 @@ def step_then_inventory(context):
     actual_url = context.driver.current_url
     assert actual_url == expected_url, f"Expected URL: {expected_url}, Actual URL: {actual_url}"
 
-@given("I am on the inventory page")
+@given("I log on to the inventory page")
 def step_given_inventory(context):
     context.driver = utils.log_in_to_inventory()
+    actual_url = 'FOOBAR'
+    print(f'LANDED ON___{actual_url}')
 
-@given("I have a {list} of items to order") 
-def step_given_list(context, list):
-    context.list = list
-    print(context.list)
+@given("I have a list of '{items}' to order") 
+def step_given_list(context, items):
+    context.items = [item.strip() for item in items.split(',')]
+
+@when("I click 'Add to cart' for each item")
+def step_when_add_to_cart(context):
+    for item in context.items:
+        item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
+        utils.clickById(context.driver, item_id)
+
+    
+
 
 
 
