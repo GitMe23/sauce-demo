@@ -45,12 +45,22 @@ def step_open_cart_page(context):
     utils.navigate_to_cart(context.driver, context.items)
 
 @given('I am on the "checkout-step-one" page')
-def step_open_cart_page(context):
+def step_open_checkout_stage_one(context):
     utils.navigate_to_checkout_step_one(context.driver, context.items)    
 
 @given('I enter my {first} name, {last} name, and {postal_code}') 
 def step_given_enter_details(context, first, last, postal_code): 
     utils.enter_user_details(context.driver, first, last, postal_code)  
+
+@given('I am on the "checkout-step-two" page')
+def step_open_checkout_step_two(context):
+    utils.navigate_to_checkout_step_two(context.driver, context.items)  
+
+@then('I should see "{text}"')
+def step_then_see_message(context, text):
+    utils.is_visible(context.driver, text)
+
+
      
     
     

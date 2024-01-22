@@ -23,4 +23,5 @@ CHECKOUT = "checkout"
 FIRST_NAME = "first-name"
 LAST_NAME = "last-name"
 POST_CODE = "postal-code"
+CONTINUE = "continue"
 

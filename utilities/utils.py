@@ -44,14 +44,23 @@ def navigate_to_checkout_step_one(driver, items):
     navigate_to_cart(driver, items)
     clickById(driver, CHECKOUT)
 
-def navigate_to_checkout_step_two(driver, items, first, last, area_code):
+def navigate_to_checkout_step_two(driver, items, first="P.A.", last="Consulting", postal_code="EC1M 3HE"):
     navigate_to_checkout_step_one(driver, items)
-    enter_user_details(driver, first, last, area_code)
+    enter_user_details(driver, first, last, postal_code)
+    clickById(driver, CONTINUE)
 
 def enter_user_details(driver, first, last, postal_code):
     driver.find_element(By.ID, FIRST_NAME).send_keys(first)
     driver.find_element(By.ID, LAST_NAME).send_keys(last)
     driver.find_element(By.ID, POST_CODE).send_keys(postal_code)
+
+def is_visible(driver, text):
+    html_content = driver.page_source    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    elements_with_text = soup.find_all(string=text)
+    # Check if at least one visible 
+    visible_elements = [element for element in elements_with_text if element.parent and element.parent.visible]
+    return bool(visible_elements)    
 
 
 
