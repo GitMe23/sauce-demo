@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from config.config import *
 import os
 from config.logging_config import *
+from bs4 import BeautifulSoup
+
 
 def initialise_driver():
     return webdriver.Chrome()
@@ -23,9 +25,8 @@ def log_in_to_inventory(driver):
     clickById(driver, LOGIN)
     return driver
 
-def get_item_container(context, item_name):
-    # Find the div with class 'inventory_item' that contains a div with class 
-    # 'inventory_item_name' equal to the current item
-    css_selector = f'div.inventory_item:has(div.inventory_item_name:contains("{item_name}"))'
-    inventory_item_div = context.driver.find_element_by_css_selector(css_selector)
-    return inventory_item_div
+def item_is_in_cart(context, item_name):
+    html_content = context.driver.page_source    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    inventory_item_div = soup.find('div', class_='inventory_item_name', string=item_name)
+    return inventory_item_div is not None

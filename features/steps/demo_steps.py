@@ -15,11 +15,11 @@ def step_when_log_in(context, user):
 
 @when('I click the "{id}"')
 def step_click(context, id):
-    context.driver.find_element(By.ID, id).click()
+    utils.clickById(context.driver, id)
 
-@then('I should be taken to the inventory page')
-def step_then_inventory(context):
-    expected_url = f"{os.getenv('ROOT_URL')}/inventory.html"
+@then('I should be taken to the "{page_name}" page')
+def step_then_inventory(context, page_name):
+    expected_url = f"{os.getenv('ROOT_URL')}/{page_name}.html"
     actual_url = context.driver.current_url
     assert actual_url == expected_url, f"Expected URL: {expected_url}, Actual URL: {actual_url}"
 
@@ -29,15 +29,22 @@ def step_given_inventory(context):
 
 @given('I have a list of {items} to order') 
 def step_given_list(context, items):
-    logging.warning(items)
-    # context.items = [item.strip() for item in items.split(',')]
-    # logging.warning(context.items)
+    context.items = [item.strip() for item in items.split(',')]
 
 @when("I click 'Add to cart' for each item")
 def step_when_add_to_cart(context):
     for item in context.items:
         item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
         utils.clickById(context.driver, item_id)
+
+@then('I should see all of my items')
+def step_see_user_items(context):
+    results = [utils.item_is_in_cart(context, item) for item in context.items]
+    logging.warning(results)
+    assert all(results), "Not all items are in the cart"
+
+
+
 
 
     
