@@ -29,14 +29,16 @@ def step_given_inventory(context):
 
 @given("I have a list of '{items}' to order") 
 def step_given_list(context, items):
+    logging.warning(items)
     context.items = [item.strip() for item in items.split(',')]
+    logging.warning(context.items)
 
 @when("I click 'Add to cart' for each item")
 def step_when_add_to_cart(context):
     for item in context.items:
         item_id = f'add-to-cart-{item.lower().replace(" ", "-")}'
         utils.clickById(context.driver, item_id)
-        
+
 
     
 
