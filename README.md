@@ -31,6 +31,10 @@ The downloads can be found at https://www.python.org/downloads/
 ### Install requirements
 After installing the repo and Python 3, the required dependencies need to be installed within the project folder by running:
 ```bash
+pip install -r requirements.txt
+```
+If you have trouble with pip or from pre-existing packahes, try installing just within the module itself:
+```bash
 python3 -m pip install -r requirements.txt
 ```
 
@@ -42,11 +46,18 @@ behave
 
 ### Test reports
 ###### -- OPTIONAL
-By default the test framework usesBehave's logger to print results in the console, and also write custom logging to logs/demo.log. If you would like to install a web app to open and view comprehensive test reports from within a browser, you will need to have npm installed and allure-behave.
-Install allure-behave from within the sauce-demo folder:
+By default, the test framework uses Behave's logger to print results in the console, and also write custom logging to logs/demo.log. If you would like to install a web app to open and view comprehensive test reports from within a browser, you will need to have npm installed and allure-behave.
+Inside the repository folder:
+```bash
+npm install -g allure-commandline
+```
+
+
+If you have issues, you can try installing just within the module itself:
 ```bash
 python3 -m pip install allure-behave
 ```
+
 Then instead of 'behave', run the following to 
 ```bash
 behave -f allure_behave.formatter:AllureFormatter -o %allure_result_folder% ./features
@@ -54,6 +65,7 @@ behave -f allure_behave.formatter:AllureFormatter -o %allure_result_folder% ./fe
 ```bash
 allure serve %allure_result_folder%
 ```
+
 
 
 
