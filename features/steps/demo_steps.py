@@ -70,14 +70,13 @@ def step_items_sum(context):
     swag_catalogue_df = pd.read_json(ITEMS, orient='columns')
     items_to_sum = context.items
     
-    # Filter the catalogue for user's items
+    # Create a mask of the user's items from the swag catalogue
     filtered_df = swag_catalogue_df[swag_catalogue_df['name'].isin(items_to_sum)]
    
-    # Calculate the sum of prices for the specified items
+    # Calculate the sum of user's mask dataframe
     expected_total = filtered_df['price'].sum()
-    logging.info(f'\nChosen items:\n{filtered_df}\n\t\tEXPECTED TOTAL: ${expected_total}')
+    logging.info(f'\nChosen items:\n{filtered_df}\n\t\t  EXPECTED TOTAL: {expected_total}')
     
-    # Get total on page
     actual_total = utils.get_item_total_on_page(context.driver)
 
     assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
@@ -91,8 +90,12 @@ def step_click_quantity(context):
 
 @then('I should be able to enter a new {value}')
 def step_enter_qty(context, value):
-    assert context.cart_quantity_div.send_keys(value), f"Failed to enter a new value: {value}"
-
+    try:
+        context.cart_quantity_div.send_keys(value)
+        assert True, f"Succeeded in sending keys: {value}"
+    except Exception as e:
+        assert False, f"Failed to send keys: {e}"
+    
 @then('I should see the correct number of items on the shopping cart badge')
 def step_see_items_on_cart_badge(context):
     cart_items = utils.get_number_of_items_on_cart_badge(context.driver)
@@ -100,9 +103,7 @@ def step_see_items_on_cart_badge(context):
 
 @then('I should be able to remove {item}')
 def step_remove_items_from_inventory_page(context, item):
-    logging.warn(context.items)
     context.items.remove(item)
-    logging.warn(context.items)
     utils.get_remove_button(context.driver, item).click()
 
 
