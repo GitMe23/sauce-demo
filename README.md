@@ -8,6 +8,7 @@ Python-behave regression test framework for user journeys at https://www.saucede
 * [Download Python 3](https://github.com/GitMe23/sauce-demo.git#download-python-3)
 * [Install requirements](https://github.com/GitMe23/sauce-demo.git#install-requirements)
 * [Run the test scenarios](https://github.com/GitMe23/sauce-demo.git#run-the-test-scenarios)
+* [Optional: Reporting](https://github.com/GitMe23/sauce-demo.git#test-reports)
 * [Note on security](https://github.com/GitMe23/sauce-demo.git#note-on-security)
 
 
@@ -38,6 +39,24 @@ Once you have the repo, Chrome, Python 3 and have installed the requirements, si
 ```bash
 behave
 ```
+
+### Test reports
+###### -- OPTIONAL
+By default the test framework usesBehave's logger to print results in the console, and also write custom logging to logs/demo.log. If you would like to install a web app to open and view comprehensive test reports from within a browser, you will need to have npm installed and allure-behave.
+Install allure-behave from within the sauce-demo folder:
+```bash
+python3 -m pip install allure-behave
+```
+Then instead of 'behave', run the following to 
+```bash
+behave -f allure_behave.formatter:AllureFormatter -o %allure_result_folder% ./features
+```
+```bash
+allure serve %allure_result_folder%
+```
+
+
+
 
 > ## Note on security
 >The [.env](.env) file loads environment variables such as credentials, addresses and environment variables of the system under test.
