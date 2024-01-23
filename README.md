@@ -37,7 +37,7 @@ After installing the repo and Python 3, the required dependencies need to be ins
 ```bash
 pip install -r requirements.txt
 ```
-If you have trouble with pip or from pre-existing packahes, try installing just within the module itself:
+If you have trouble with pip or from pre-existing packages, try installing just within the module itself:
 ```bash
 python3 -m pip install -r requirements.txt
 ```
