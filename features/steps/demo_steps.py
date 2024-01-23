@@ -75,14 +75,13 @@ def step_items_sum(context):
    
     # Calculate the sum of prices for the specified items
     expected_total = filtered_df['price'].sum()
-    logging.info(f'\nChosen items:\n{filtered_df}\n EXPECTED TOTAL: ${expected_total}')
+    logging.info(f'\nChosen items:\n{filtered_df}\n\t\tEXPECTED TOTAL: ${expected_total}')
     
     # Get total on page
     actual_total = utils.get_item_total_on_page(context.driver)
 
     assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
     
-
 @when('I double click on the quantity of an item')
 def step_click_quantity(context):
     wait = WebDriverWait(context.driver, 1)
@@ -94,6 +93,11 @@ def step_click_quantity(context):
 def step_enter_qty(context, value):
     assert context.cart_quantity_div.send_keys(value), f"Failed to enter a new value: {value}"
 
+@then('I should see the correct number of items on the shopping cart badge')
+def step_see_items_on_cart_badge(context):
+    cart_items = utils.get_html_content(context.driver).find('span', class_='shopping_cart_badge').get_text()
+    # cart_badge = soup
+    assert len(context.list) == cart_items, f"Expected {len(context.list)} items, {cart_items} items in cart on page"
 
 
 
