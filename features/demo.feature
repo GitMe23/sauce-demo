@@ -112,7 +112,22 @@ Feature: User journeys on the Sauce Demo website
    | items                                                                            | 
    | Sauce Labs Backpack, Sauce Labs Bike Light                                       | 
 
-
+@sauce-00x @browser
+  Scenario Outline: The user can log in and complete an order in one session
+   Given I log on to the inventory page
+     And I have a list of <items> to order
+    When I click 'Add to cart' for each item
+     And I click "shopping_cart_container"
+     And I click "checkout"
+     And I enter my <first> name, <last> name, and <postal_code> 
+     And I click "continue" 
+     And I should see that the total price is the correct sum of chosen items
+     And I click "finish" 
+    Then I should be taken to the "checkout-complete" page 
+     And I should see "Thank you for your order!"
+  Examples: 
+   | items                                        | first     | last    | postal_code |
+   | Sauce Labs Onesie, Sauce Labs Fleece Jacket  | Joe       | Bloggs  | 101         |
     
 
 

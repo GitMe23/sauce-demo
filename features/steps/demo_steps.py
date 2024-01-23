@@ -52,7 +52,7 @@ def step_open_cart_page(context):
 def step_open_checkout_stage_one(context):
     utils.navigate_to_checkout_step_one(context.driver, context.items)    
 
-@given('I enter my {first} name, {last} name, and {postal_code}') 
+@step('I enter my {first} name, {last} name, and {postal_code}') 
 def step_given_enter_details(context, first, last, postal_code): 
     utils.enter_user_details(context.driver, first, last, postal_code)  
 
@@ -64,7 +64,7 @@ def step_open_checkout_step_two(context):
 def step_then_see_message(context, text):
     utils.is_visible(context.driver, text)
 
-@then('I should see that the total price is the correct sum of chosen items')
+@step('I should see that the total price is the correct sum of chosen items')
 def step_items_sum(context):
     swag_catalogue_df = pd.read_json(ITEMS, orient='columns')
     items_to_sum = context.items
