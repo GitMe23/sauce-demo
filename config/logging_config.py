@@ -32,3 +32,4 @@ LOGGING_CONFIG = {
 }
 # Run once at startup:
 logging.config.dictConfig(LOGGING_CONFIG)
+logging.info('********************************')

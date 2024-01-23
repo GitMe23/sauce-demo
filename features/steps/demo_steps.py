@@ -95,11 +95,19 @@ def step_enter_qty(context, value):
 
 @then('I should see the correct number of items on the shopping cart badge')
 def step_see_items_on_cart_badge(context):
-    cart_items = utils.get_html_content(context.driver).find('span', class_='shopping_cart_badge').get_text()
-    # cart_badge = soup
-    assert len(context.list) == cart_items, f"Expected {len(context.list)} items, {cart_items} items in cart on page"
+    cart_items = utils.get_number_of_items_on_cart_badge(context.driver)
+    assert len(context.items) == cart_items, f"Expected {len(context.list)} items, {cart_items} items in cart on page"
+
+@then('I should be able to remove {item}')
+def step_remove_items_from_inventory_page(context, item):
+    logging.warn(context.items)
+    context.items.remove(item)
+    logging.warn(context.items)
+    utils.get_remove_button(context.driver, item).click()
 
 
+    
+        
 
 
 

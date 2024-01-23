@@ -84,17 +84,29 @@ Feature: User journeys on the Sauce Demo website
   #  | Test.allTheThings() T-Shirt (Red)                     |  3                         |   
 
 
+  # @sauce-00x @browser
+  # Scenario Outline: The user can see the number of items in their cart from the inventory page
+  #  Given I log on to the inventory page
+  #    And I have a list of <items> to order
+  #   When I click 'Add to cart' for each item
+  #   Then I should see the correct number of items on the shopping cart badge
+  #  Examples: 
+  #  | items                                                                               | 
+  #  | Test.allTheThings() T-Shirt (Red)                                                   |  
+  #  | Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Backpack                    |
+
   @sauce-00x @browser
-  Scenario Outline: The user can see the number of items in their cart from the inventory page
+  Scenario Outline: The user can remove an item in their cart from the inventory page
    Given I log on to the inventory page
      And I have a list of <items> to order
     When I click 'Add to cart' for each item
     Then I should see the correct number of items on the shopping cart badge
+     And I should be able to remove <unwanted_item>
+     And I should see the correct number of items on the shopping cart badge
    Examples: 
-   | items                                                                               | 
-   | Test.allTheThings() T-Shirt (Red)                                                   |  
-   | Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Backpack                    |
-
+   | items                                                | unwanted_item                | 
+   | Sauce Labs Fleece Jacket                             | Sauce Labs Fleece Jacket     |  
+   | Sauce Labs Onesie, Sauce Labs Backpack               | Sauce Labs Onesie            |
 
 
 # Should be able to order any item

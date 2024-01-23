@@ -79,6 +79,25 @@ def get_html_content(driver):
     html_content = driver.page_source    
     return BeautifulSoup(html_content, 'html.parser')
 
+def get_number_of_items_on_cart_badge(driver):
+    html_content = get_html_content(driver)
+    cart_badge_span = html_content.find('span', class_='shopping_cart_badge')
+    if cart_badge_span:
+        cart_badge_text = cart_badge_span.get_text(strip=True)
+        try:
+            number_of_items_in_cart = int(cart_badge_text)
+            return number_of_items_in_cart
+        except ValueError:
+            logging.warning(f'Failed to convert cart badge text to integer: {cart_badge_text}')
+            return 0
+    else:
+        return 0
 
+
+def get_remove_button(driver, item):
+    get_html_content(driver)
+    item_id = f'remove-{item.lower().replace(" ", "-")}'    
+    remove_button = driver.find_element(By.ID, item_id)
+    return remove_button
 
 
