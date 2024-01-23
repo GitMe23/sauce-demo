@@ -43,31 +43,30 @@ Once you have the repo, Chrome, Python 3 and have installed the requirements, si
 ```bash
 behave
 ```
+The test framework should start running and you will see a web driver opening Chrome and automating tests.
 
 ### Test reports
 ###### -- OPTIONAL
 By default, the test framework uses Behave's logger to print results in the console, and also write custom logging to logs/demo.log. If you would like to install a web app to open and view comprehensive test reports from within a browser, you will need to have npm installed and allure-behave.
+
 Inside the repository folder:
 ```bash
 npm install -g allure-commandline
 ```
 
-
-If you have issues, you can try installing just within the module itself:
 ```bash
 python3 -m pip install allure-behave
 ```
-
-Then instead of 'behave', run the following to 
+You can also try:
 ```bash
-behave -f allure_behave.formatter:AllureFormatter -o %allure_result_folder% ./features
-```
-```bash
-allure serve %allure_result_folder%
+pip install allure-behave
 ```
 
-
-
+Then instead of 'behave', run the shell script from within the project directory:
+```bash
+./run_with_report.sh
+```
+The test framework should now run and your default browser will open a browser-based report.
 
 
 > ## Note on security
