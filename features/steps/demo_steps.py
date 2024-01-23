@@ -64,7 +64,6 @@ def step_open_checkout_step_two(context):
 def step_then_see_message(context, text):
     utils.is_visible(context.driver, text)
 
-
 @then('I should see that the total price is the correct sum of chosen items')
 def step_items_sum(context):
     swag_catalogue_df = pd.read_json(ITEMS, orient='columns')
@@ -100,6 +99,16 @@ def step_enter_qty(context, value):
 def step_see_items_on_cart_badge(context):
     cart_items = utils.get_number_of_items_on_cart_badge(context.driver)
     assert len(context.items) == cart_items, f"Expected {len(context.list)} items, {cart_items} items in cart on page"
+
+@then('I should see all items from the Swag catalogue')
+def step_then_all_catalogue_items_visible(context):
+    with open('fixtures/items.json', 'r') as file:
+        catalogue = json.load(file)
+    soup = utils.get_html_content(context.driver)
+    items_on_page = {div.get_text(strip=True) for div in soup.find_all('div', class_='inventory_item_name')}
+    swag_catalogue = {item['name'] for item in catalogue}
+    assert all(item in items_on_page for item in swag_catalogue), f"Not all items from the Swag catalogue are visible on the page."
+
 
 @then('I should be able to remove {item}')
 def step_remove_items_from_inventory_page(context, item):

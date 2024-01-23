@@ -20,7 +20,7 @@ def clickById(driver, element_id):
 
 def log_in_to_inventory(driver):
     navigate_to_root(driver)
-    enter_credentials(driver, user_dict['STANDARD_USER'], SAUCE_PASSWORD)
+    enter_credentials(driver, USER_DICT['STANDARD_USER'], SAUCE_PASSWORD)
     clickById(driver, LOGIN)
     return driver
 
@@ -57,7 +57,6 @@ def enter_user_details(driver, first, last, postal_code):
 def is_visible(driver, text):
     soup = get_html_content(driver)
     elements_with_text = soup.find_all(string=text)
-    # Check if at least one visible 
     visible_elements = [element for element in elements_with_text if element.parent and element.parent.visible]
     return bool(visible_elements)    
 
@@ -99,5 +98,4 @@ def get_remove_button(driver, item):
     item_id = f'remove-{item.lower().replace(" ", "-")}'    
     remove_button = driver.find_element(By.ID, item_id)
     return remove_button
-
 
