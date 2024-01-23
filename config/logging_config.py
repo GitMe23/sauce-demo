@@ -1,5 +1,9 @@
+import os
 import logging
 import logging.config
+
+if not os.path.exists('logs'):
+    os.mkdir('logs')
 
 LOGGING_CONFIG = {
     'version': 1,

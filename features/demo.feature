@@ -20,23 +20,23 @@ Feature: User journeys on the Sauce Demo website
    | Test.allTheThings() T-Shirt (Red)                                                | 
    | Sauce Labs Bolt T-Shirt, Sauce Labs Fleece Jacket, Sauce Labs Onesie             |
 
-  @sauce-00x @browser
+  @sauce-003 @browser
   Scenario: All items in the catalogue are visible
    Given I log on to the inventory page
     Then I should see all items from the Swag catalogue
 
-  @sauce-00x @browser
+  @sauce-004 @browser
   Scenario Outline: The user can see the number of items in their cart from the inventory page
    Given I log on to the inventory page
      And I have a list of <items> to order
     When I click 'Add to cart' for each item
     Then I should see the correct number of items on the shopping cart badge
    Examples: 
-   | items                                                                               | 
-   | Test.allTheThings() T-Shirt (Red)                                                   |  
-   | Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Backpack                    |
+   | items                                                                             | 
+   | Test.allTheThings() T-Shirt (Red)                                                 |  
+   | Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Backpack                  |
 
-  @sauce-00x @browser
+  @sauce-005 @browser
   Scenario Outline: The user can remove an item in their cart from the inventory page
    Given I log on to the inventory page
      And I have a list of <items> to order
@@ -45,11 +45,11 @@ Feature: User journeys on the Sauce Demo website
      And I should be able to remove <unwanted_item>
      And I should see the correct number of items on the shopping cart badge
    Examples: 
-   | items                                                | unwanted_item                | 
-   | Sauce Labs Fleece Jacket                             | Sauce Labs Fleece Jacket     |  
-   | Sauce Labs Onesie, Sauce Labs Backpack               | Sauce Labs Onesie            |
+   | items                                                | unwanted_item             | 
+   | Sauce Labs Fleece Jacket                             | Sauce Labs Fleece Jacket  |  
+   | Sauce Labs Onesie, Sauce Labs Backpack               | Sauce Labs Onesie         |
 
-  @sauce-00x @browser
+  @sauce-006 @browser
   Scenario Outline: The user can navigate to checkout step one
    Given I have a list of <items> to order
      And I am on the cart page
@@ -59,7 +59,7 @@ Feature: User journeys on the Sauce Demo website
    | items                                                                            |
    | Sauce Labs Backpack, Sauce Labs Bike Light                                       |
 
-  @sauce-00x @browser
+  @sauce-007 @browser
   Scenario Outline: The user can enter their personal details
    Given I have a list of <items> to order
      And I am on the "checkout-step-one" page 
@@ -70,7 +70,7 @@ Feature: User journeys on the Sauce Demo website
    | items                                        | first     | last    | postal_code |
    | Sauce Labs Onesie, Sauce Labs Fleece Jacket  | Joe       | Bloggs  | 101         |
 
-  @sauce-00x @browser
+  @sauce-008 @browser
   Scenario Outline: The user can review their order
     Given I have a list of <items> to order
       And I am on the "checkout-step-two" page
@@ -81,17 +81,17 @@ Feature: User journeys on the Sauce Demo website
    | items                                                                            | 
    | Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt (Red)                      | 
    
-  @sauce-00x @browser
+  @sauce-009 @browser
   Scenario Outline: The user can change the quantity of an item
    Given I have a list of <items> to order
      And I am on the "checkout-step-two" page 
     When I double click on the quantity of an item
     Then I should be able to enter a new value
    Examples: 
-   | items                                                 | value                      |
-   | Test.allTheThings() T-Shirt (Red)                     |  3                         | 
+   | items                                                 | value                    |
+   | Test.allTheThings() T-Shirt (Red)                     |  3                       | 
 
-  @sauce-00x @browser
+  @sauce-010 @browser
   Scenario Outline: Items in the cart add up to to the correct total
    Given I have a list of <items> to order
      And I am on the "checkout-step-two" page 
@@ -101,7 +101,7 @@ Feature: User journeys on the Sauce Demo website
    | Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt (Red)                      | 
    | Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Backpack                 |
 
-  @sauce-00x @browser
+  @sauce-011 @browser
   Scenario Outline: The user can complete their order 
    Given I have a list of <items> to order
      And I am on the "checkout-step-two" page 
@@ -112,7 +112,7 @@ Feature: User journeys on the Sauce Demo website
    | items                                                                            | 
    | Sauce Labs Backpack, Sauce Labs Bike Light                                       | 
 
-@sauce-00x @browser
+@sauce-012 @browser
   Scenario Outline: The user can log in and complete an order in one session
    Given I log on to the inventory page
      And I have a list of <items> to order
