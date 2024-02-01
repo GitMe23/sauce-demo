@@ -2,7 +2,11 @@
 
 A front-end Python automation framework for testing user journeys at https://www.saucedemo.com
 
-This framework makes use of an example website to run BDD style scenarios via automation using Python and libraries, including Selenium, Pandas and Behave. 
+This framework makes use of an example website to run BDD style scenarios via automation using Python and the following libraries:
+* Selenium Web Driver
+* Beautiful Soup
+* Pandas
+* Behave
 
 The repo includes a feature file for test scenarios in Cucumber format, an underlying step definition file for executing the tests, and a utility layer made up of helper methods where I have included single-responsibility, reuseable functions. You will need a Gitbash or Unix based terminal before walking through the installation listed below.
 
