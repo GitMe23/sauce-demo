@@ -1,9 +1,9 @@
 from config.logging_config import *
-from utilities import utils
+from utilities import env_utils, utils
 
 def before_all(context):
    logging.info('Running Behave...')
-   utils.record_env()
+   env_utils.create_properties()
 
 def before_scenario(context, scenario):
    if "browser" in scenario.tags:

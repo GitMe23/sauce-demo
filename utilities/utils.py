@@ -100,8 +100,3 @@ def get_remove_button(driver, item):
     item_id = f'remove-{item.lower().replace(" ", "-")}'    
     remove_button = driver.find_element(By.ID, item_id)
     return remove_button
-
-def record_env():
-    if not os.path.exists('allure-results/environment.properties'):
-        with open('allure-results/environment.properties', 'w') as env_properties:
-            env_properties.write(f"url = {os.getenv('ROOT_URL')}")

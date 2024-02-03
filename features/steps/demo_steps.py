@@ -74,11 +74,11 @@ def step_items_sum(context):
    
     # Calculate the sum of user's mask dataframe
     expected_total = filtered_df['price'].sum()
-    logging.info(f'\nChosen items:\n{filtered_df}\n\t\t  EXPECTED TOTAL: {expected_total}')
+    logging.info(f'\nChosen items:\n{filtered_df}\n\t\t  EXPECTED TOTAL: {expected_total:.2f}')
     
     actual_total = utils.get_item_total_on_page(context.driver)
 
-    assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
+    assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total:.2f}, EXPECTED TOTAL: {expected_total:.2f}'
     
 @when('I double click on the quantity of an item')
 def step_click_quantity(context):
