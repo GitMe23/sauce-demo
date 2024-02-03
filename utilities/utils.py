@@ -103,6 +103,5 @@ def get_remove_button(driver, item):
 
 def record_env():
     if not os.path.exists('allure-results/environment.properties'):
-        os.touch('allure-results/environment.properties')
-    with open('allure-results/environment.properties', 'w') as env_properties:
-        env_properties.write(f"url = {os.getenv('ROOT_URL')}")
+        with open('allure-results/environment.properties', 'w') as env_properties:
+            env_properties.write(f"url = {os.getenv('ROOT_URL')}")
