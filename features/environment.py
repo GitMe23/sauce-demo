@@ -3,6 +3,7 @@ from utilities import utils
 
 def before_all(context):
    logging.info('Running Behave...')
+   utils.record_env()
 
 def before_scenario(context, scenario):
    if "browser" in scenario.tags:

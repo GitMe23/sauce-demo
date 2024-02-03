@@ -4,6 +4,8 @@ from config.config import *
 import os
 from config.logging_config import *
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
 def initialise_driver():
     return webdriver.Chrome()
@@ -99,3 +101,7 @@ def get_remove_button(driver, item):
     remove_button = driver.find_element(By.ID, item_id)
     return remove_button
 
+def record_env():
+    if not os.path.exists('allure-results/environment.properties'):
+        with open('allure-results/environment.properties', 'w') as env_properties:
+            env_properties.write(f"url = {os.getenv('ROOT_URL')}")
