@@ -4,7 +4,7 @@ logs/
 
 # Allure
 allure-results
-allure-results/*
+allure-report
 
 # Swap files
 .swp

@@ -1,8 +1,12 @@
 #!/bin/bash
 
 echo "Running Python-behave test automation framework..."
-echo "This may take a couple of minutes"
-echo "See README for instructions on installation"
+echo "See README for any troubleshooting"
 
-behave -f allure_behave.formatter:AllureFormatter -o allure-results features/demo.feature
-allure serve allure-results/
+mkdir -p allure-results/history
+behave -f allure_behave.formatter:AllureFormatter -o allure-results features
+cp allure-report/history/* allure-results/history
+allure generate --clean allure-results
+allure open
+
+
