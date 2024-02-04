@@ -74,11 +74,11 @@ def step_items_sum(context):
    
     # Calculate the sum of user's mask dataframe
     expected_total = filtered_df['price'].sum()
-    logging.info(f'\nChosen items:\n{filtered_df}\n\t\t  EXPECTED TOTAL: {expected_total}')
+    logging.info(f'\nChosen items:\n{filtered_df}\n\t\t  EXPECTED TOTAL: {expected_total:.2f}')
     
     actual_total = utils.get_item_total_on_page(context.driver)
 
-    assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total}, EXPECTED TOTAL: {expected_total}'
+    assert actual_total == expected_total, f'ACTUAL TOTAL: {actual_total:.2f}, EXPECTED TOTAL: {expected_total:.2f}'
     
 @when('I double click on the quantity of an item')
 def step_click_quantity(context):
@@ -89,11 +89,12 @@ def step_click_quantity(context):
 
 @then('I should be able to enter a new {value}')
 def step_enter_qty(context, value):
-    try:
+    is_input_element = context.cart_quantity_div.tag_name.lower() == 'input'
+    if is_input_element:
         context.cart_quantity_div.send_keys(value)
         assert True, f"Succeeded in sending keys: {value}"
-    except Exception as e:
-        assert False, f"Failed to send keys: {e}"
+    else:
+        assert False, f"Element is not an input type element"  
     
 @then('I should see the correct number of items on the shopping cart badge')
 def step_see_items_on_cart_badge(context):
@@ -108,7 +109,6 @@ def step_then_all_catalogue_items_visible(context):
     items_on_page = {div.get_text(strip=True) for div in soup.find_all('div', class_='inventory_item_name')}
     swag_catalogue = {item['name'] for item in catalogue}
     assert all(item in items_on_page for item in swag_catalogue), f"Not all items from the Swag catalogue are visible on the page."
-
 
 @then('I should be able to remove {item}')
 def step_remove_items_from_inventory_page(context, item):

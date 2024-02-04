@@ -17,7 +17,7 @@ LAST_NAME = "last-name"
 POST_CODE = "postal-code"
 CONTINUE = "continue"
 
-# Load user_list from the 
+# Load user_list from test fixtures
 with open('fixtures/users.json', 'r') as data:
     users = json.load(data)
     user_list = users.get('user_list', [])
